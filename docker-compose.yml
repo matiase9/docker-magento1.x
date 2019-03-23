@@ -10,18 +10,18 @@ services:
     links:
       - php
     volumes:
-      - ./tiendanaranja1/tiendanaranja:/var/www/html
+      - ./root_project:/var/www/html
       - ./config/nginx/sites-enabled/vhost-magento.conf:/etc/nginx/conf.d/default.conf
       - ./config/nginx/ssl:/etc/nginx/ssl
     depends_on:
-      - php 
+      - php
   php:
     container_name: php
     image: meanbee/magento:${PHP_VERSION}
     restart: always
     volumes:
       - ./config/php/php.ini:/usr/local/etc/php/php.ini
-      - ./tiendanaranja1/tiendanaranja:/var/www/html
+      - ./root_project:/var/www/html
       - tn-volume-sync:/var/www/html:nocopy
       - ./config/php/extension:/usr/local/etc/php/conf.d
       - ~/.ssh:/var/www/.ssh-local:ro
